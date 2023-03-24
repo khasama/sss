@@ -1,7 +1,4 @@
 require("dotenv").config();
-const pool = require("./src/configs/mssql.config");
-const sql = require("mssql");
-
 const express = require("express");
 const app = express();
 const session = require("express-session");
@@ -34,43 +31,43 @@ app.use(
 app.set("view engine", "ejs");
 app.set("views", "./src/views");
 
-app.get('/all', async (req, res) => {
-    try {
-        const result = await pool.query("select * from LINKSERVER.sss.dbo.tb_staffs");
-        return res.status(200).json({ status: 'ok', data: result.recordset });
-    } catch (error) {
-        console.log(error);
-        return res.status(200).json({ status: 'error', msg: error.message });
-    }
-});
+// app.get('/all', async (req, res) => {
+//     try {
+//         const result = await pool.query("select * from LINKSERVER.sss.dbo.tb_staffs");
+//         return res.status(200).json({ status: 'ok', data: result.recordset });
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(200).json({ status: 'error', msg: error.message });
+//     }
+// });
 
-app.get('/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const result = await pool.request()
-            .input('id', sql.Int, id)
-            .query("select * from tb_staffs where id = @id");
-        if (result.recordset.length > 0) {
-            return res.status(200).json({ status: 'ok', data: result.recordset[0] });
-        } else {
-            return res.status(200).json({ status: 'error', msg: 'not found' });
-        }
-    } catch (error) {
-        return res.status(200).json({ status: 'error', msg: error.message });
-    }
-});
+// app.get('/:id', async (req, res) => {
+//     try {
+//         const id = req.params.id;
+//         const result = await pool.request()
+//             .input('id', sql.Int, id)
+//             .query("select * from tb_staffs where id = @id");
+//         if (result.recordset.length > 0) {
+//             return res.status(200).json({ status: 'ok', data: result.recordset[0] });
+//         } else {
+//             return res.status(200).json({ status: 'error', msg: 'not found' });
+//         }
+//     } catch (error) {
+//         return res.status(200).json({ status: 'error', msg: error.message });
+//     }
+// });
 
-app.get('/', async (req, res) => {
-    try {
-        const result = await pool.query("select * from tb_staffs");
-        return res.status(200).json({ status: 'ok', data: result.recordset });
-    } catch (error) {
-        return res.status(200).json({ status: 'error', msg: error.message });
-    }
-});
+// app.get('/', async (req, res) => {
+//     try {
+//         const result = await pool.query("select * from tb_staffs");
+//         return res.status(200).json({ status: 'ok', data: result.recordset });
+//     } catch (error) {
+//         return res.status(200).json({ status: 'error', msg: error.message });
+//     }
+// });
 
 
 
-// app.use(require("./src/routes"));
+app.use(require("./src/routes"));
 
 module.exports = app;
