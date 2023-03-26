@@ -1,9 +1,7 @@
 const ProductController = require("./product.controller");
-// const ServerController = require("./server.controller");
-// const EpisodeController = require("./episode.controller");
-// const LinkController = require("./link.controller");
-// const UserController = require("./user.controller");
-// const ToolController = require("./tool.controller");
+const CategoryController = require("./category.controller");
+const StaffController = require("./staff.controller");
+const MembershipController = require("./membership.controller");
 
 const BranchModel = require("../../models/branch.model");
 
@@ -21,9 +19,9 @@ AdminController.dashboard = async (req, res) => {
 
 module.exports = {
     ProductController,
-    // ServerController,
-    // EpisodeController,
-    // LinkController,
+    CategoryController,
+    StaffController,
+    MembershipController,
     // UserController,
     // ToolController,
     AdminController,

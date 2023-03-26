@@ -16,8 +16,8 @@ const sqlConfig = {
     user: process.env.MSSQL_USERNAME,
     password: process.env.MSSQL_PASSWORD,
     database: process.env.MSSQL_DATABASE,
-    server: server || process.env.MSSQL_SERVER,
-    port: port || 1434,
+    server: server,
+    port: port,
     pool: {
         max: 10,
         min: 0,

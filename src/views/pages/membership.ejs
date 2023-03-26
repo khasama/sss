@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch}) %>
+    </header>
+
+    <div>
+        <h3>Quản lý Thành viên</h3>
+
+        <div style="display: flex;">
+            <div>
+                <table style="border: 1px #000 solid;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px #000 solid;">ID</th>
+                            <th style="border: 1px #000 solid;">Name</th>
+                            <th style="border: 1px #000 solid;">Phone</th>
+                            <th style="border: 1px #000 solid;">Level</th>
+                            <th style="border: 1px #000 solid;">Deleted</th>
+                            <th style="border: 1px #000 solid;">
+                                <a href="javascript:void(0)">🛠</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% memberships.forEach(membership=> { %>
+                            <tr id="membership-<%- membership.id; %>">
+                                <td style="border: 1px #000 solid;">
+                                    <%- membership.id %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- membership.name %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- membership.phone %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- membership.level %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- membership.deleted ? 'True' : 'False' %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <a href="javascript:void(0)" onclick="getMembership(this)"
+                                        data-id="<%- membership.id %>">Edit</a>
+                                    <a href="javascript:void(0)" style="color: red;" onclick="deleteMembership(this)"
+                                        data-id="<%- membership.id %>">Delete</a>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-left: 15px;">
+                <h3>Sửa</h3>
+                <div style="margin: 10px 0;">
+                    <label for="Name">Tên thành viên:</label>
+                    <input type="text" id="updateMemberName">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Phone">Số điện thoại:</label>
+                    <input type="text" id="updateMemberPhone">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Level">Level:</label>
+                    <input type="number" id="updateMemberLevel">
+                </div>
+                <input type="hidden" id="updateMemberId">
+
+                <button id="updateMember">Sửa</button>
+            </div>
+            <div style="margin-left: 15px;">
+                <h3>Thêm</h3>
+                <div style="margin: 10px 0;">
+                    <label for="Name">Tên thành viên:</label>
+                    <input type="text" id="addMemberName">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Phone">Số điện thoại:</label>
+                    <input type="text" id="addMemberPhone">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Level">Level:</label>
+                    <input type="number" id="addMemberLevel">
+                </div>
+
+                <button id="addMember">Thêm</button>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/foot') %>
+</body>
+
+</html>
