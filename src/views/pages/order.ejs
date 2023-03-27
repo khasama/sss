@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch}) %>
+    </header>
+
+    <div>
+        <h3>Quản lý Đơn hàng</h3>
+
+        <div style="display: flex;">
+            <div>
+                <table style="border: 1px #000 solid;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px #000 solid;">Customer</th>
+                            <th style="border: 1px #000 solid;">Total</th>
+                            <th style="border: 1px #000 solid;">
+                                <a href="javascript:void(0)">🛠</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% orders.forEach(order=> { %>
+                            <tr id="order-<%- order.id; %>">
+                                <td style="border: 1px #000 solid;">
+                                    <%- order.customer %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- order.total %>
+                                </td>
+
+                                <td style="border: 1px #000 solid;">
+                                    <a href="javascript:void(0)" onclick="getStorage(this)"
+                                        data-id="<%- order.id %>">Edit</a>
+                                    <a href="javascript:void(0)" style="color: red;" onclick="deleteStorage(this)"
+                                        data-id="<%- order.id %>">Delete</a>
+                                </td>
+
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-left: 15px;">
+                <h3>Sửa</h3>
+                <div style="margin: 10px 0;">
+                    <label for="Product">Sản phẩm:</label>
+                    <input type="text" id="updateStorageProduct" disabled>
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Quantity">Số lượng:</label>
+                    <input type="text" id="updateStorageQuantity">
+                </div>
+                <input type="hidden" id="updateStorageId">
+
+                <button id="updateStorage">Sửa</button>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/foot') %>
+</body>
+
+</html>

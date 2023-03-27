@@ -7,5 +7,10 @@ BranchModel.currentBranch = async () => {
     return result.recordset[0];
 }
 
+BranchModel.getAllBranch = async () => {
+    const result = await pool.query("select * from LINKSERVER.sss.dbo.tb_branchs");
+    return result.recordset;
+}
+
 
 module.exports = BranchModel;

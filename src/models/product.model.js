@@ -16,6 +16,18 @@ ProductModel.getAllProduct = async () => {
     }
 }
 
+ProductModel.getAllProductNotDelete = async () => {
+    try {
+        const result = await pool.query(`
+            select * from LINKSERVER.sss.dbo.tb_products
+            where deleted = 0
+        `);
+        return result.recordset;
+    } catch (error) {
+        throw error;
+    }
+}
+
 ProductModel.getProductWithCategory = async (idCategory) => {
     try {
         const result = await pool.request()
@@ -104,7 +116,7 @@ ProductModel.addProduct = async (name, image, size, price, idCategory) => {
             .input('idCategory', sql.Int, idCategory)
             .query(`
                 insert into LINKSERVER.sss.dbo.tb_products (name, slug, image, size, price, id_category, deleted) VALUES 
-                (@name, @slug, @image, @size, @price, ,@idCategory, 0),
+                (@name, @slug, @image, @size, @price, @idCategory, 0);
             `);
         if (result.rowsAffected[0] > 0) return true;
         return false;

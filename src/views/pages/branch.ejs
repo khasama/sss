@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch}) %>
+    </header>
+
+    <div>
+        <h3>Quản lý Chi nhánh</h3>
+
+        <div style="display: flex;">
+            <div>
+                <table style="border: 1px #000 solid;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px #000 solid;">ID</th>
+                            <th style="border: 1px #000 solid;">Branch</th>
+                            <th style="border: 1px #000 solid;">Address</th>
+                            <th style="border: 1px #000 solid;">
+                                <a href="javascript:void(0)">🛠</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% branches.forEach(branch=> { %>
+                            <tr id="branch-<%- branch.id; %>">
+                                <td style="border: 1px #000 solid;">
+                                    <%- branch.id %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- branch.branch %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- branch.address %>
+                                </td>
+
+                                <td style="border: 1px #000 solid;">
+                                    <a href="javascript:void(0)" onclick="getBranch(this)"
+                                        data-id="<%- branch.id %>">Edit</a>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-left: 15px;">
+                <h3>Sửa</h3>
+                <div style="margin: 10px 0;">
+                    <label for="Name">Chi nhánh:</label>
+                    <input type="text" id="updateBranchName">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Address">Địa chỉ:</label>
+                    <input type="text" id="updateBranchAddress">
+                </div>
+                <input type="hidden" id="updateBranchId">
+
+                <button id="updateBranch">Sửa</button>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/foot') %>
+</body>
+
+</html>

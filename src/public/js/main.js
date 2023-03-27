@@ -197,27 +197,111 @@ $(document).ready(function () {
         const price = $("#addProductPrice").val();
         const idCategory = $("#addProductCategory").val();
         const sizeChecked = $('input[name=addSize]:checked');
+        const sizeArr = [];
         if (name && image && price && sizeChecked.length > 0 && idCategory) {
-            sizeChecked.each(ele => {
-                $(ele).remove()
-            })
-            // $.ajax({
-            //     type: "POST",
-            //     url: `${domain}product/`,
-            //     data: {
-            //         name,
-            //         phone,
-            //         level,
-            //     },
-            //     success: (result) => {
-            //         if (result.status == "success") {
-            //             alert(result.status);
-            //             location.reload();
-            //         } else {
-            //             alert(result.message);
-            //         }
-            //     }
-            // });
+            sizeChecked.each(function () {
+                sizeArr.push($(this).val());
+            });
+            const size = sizeArr.join("|");
+            $.ajax({
+                type: "POST",
+                url: `${domain}product/`,
+                data: {
+                    name,
+                    image,
+                    price,
+                    idCategory,
+                    size
+                },
+                success: (result) => {
+                    if (result.status == "success") {
+                        alert(result.status);
+                        location.reload();
+                    } else {
+                        alert(result.message);
+                    }
+                }
+            });
+        }
+    });
+
+    $("#updateProduct").click(() => {
+        const id = $("#updateProductId").val().trim();
+        const name = $("#updateProductName").val().trim();
+        const image = $("#updateProductImage").val().trim();
+        const price = $("#updateProductPrice").val();
+        const idCategory = $("#updateProductCategory").val();
+        const sizeChecked = $('input[name=updateSize]:checked');
+        const sizeArr = [];
+        if (name && image && price && sizeChecked.length > 0 && idCategory) {
+            sizeChecked.each(function () {
+                sizeArr.push($(this).val());
+            });
+            const size = sizeArr.join("|");
+            $.ajax({
+                type: "PUT",
+                url: `${domain}product/${id}`,
+                data: {
+                    name,
+                    image,
+                    price,
+                    idCategory,
+                    size
+                },
+                success: (result) => {
+                    if (result.status == "success") {
+                        alert(result.status);
+                        location.reload();
+                    } else {
+                        alert(result.message);
+                    }
+                }
+            });
+        }
+    });
+
+    $("#addStorage").click(() => {
+        const idProduct = $("#addStorageProductId").val().trim();
+        const quantity = $("#addStorageQuantity").val().trim();
+        if (idProduct && quantity) {
+            $.ajax({
+                type: "POST",
+                url: `${domain}storage/`,
+                data: {
+                    idProduct,
+                    quantity,
+                },
+                success: (result) => {
+                    if (result.status == "success") {
+                        alert(result.status);
+                        location.reload();
+                    } else {
+                        alert(result.message);
+                    }
+                }
+            });
+        }
+    });
+
+    $("#updateStorage").click(() => {
+        const id = $("#updateStorageId").val().trim();
+        const quantity = $("#updateStorageQuantity").val();
+        if (id && quantity) {
+            $.ajax({
+                type: "PUT",
+                url: `${domain}storage/${id}`,
+                data: {
+                    quantity,
+                },
+                success: (result) => {
+                    if (result.status == "success") {
+                        alert(result.status);
+                        location.reload();
+                    } else {
+                        alert(result.message);
+                    }
+                }
+            });
         }
     });
 });
@@ -323,7 +407,7 @@ function deleteMembership(ele) {
             success: (result) => {
                 if (result.status == "success") {
                     alert(result.status);
-                    $(`#membership-${id}`).remove();
+                    location.reload();
                 } else {
                     alert(result.message);
                 }
@@ -344,7 +428,7 @@ function getProduct(ele) {
                 $("#productImage").attr('src', product.image);
                 $("#updateProductPrice").val(product.price);
                 $("#updateProductCategory").val(product.id_category);
-                $("#updateMemberId").val(product.id);
+                $("#updateProductId").val(product.id);
                 const allSize = product.size.split('|');
                 checkSize(allSize);
             } else {
@@ -354,6 +438,65 @@ function getProduct(ele) {
     });
 }
 
+function deleteProduct(ele) {
+    const id = $(ele).attr("data-id");
+    if (confirm("Are you sure about that ???")) {
+        $.ajax({
+            type: "DELETE",
+            url: `${domain}product/${id}`,
+            success: (result) => {
+                if (result.status == "success") {
+                    alert(result.status);
+                    location.reload();
+                } else {
+                    alert(result.message);
+                }
+            }
+        });
+    }
+}
+
+function getStorage(ele) {
+    const id = $(ele).attr("data-id");
+    $.ajax({
+        url: `${domain}storage/${id}`,
+        success: (result) => {
+            if (result.status == "success") {
+                const storage = result.data;
+                $("#updateStorageProduct").val(storage.name);
+                $("#updateStorageQuantity").val(storage.quantity);
+                $("#updateStorageId").val(storage.id);
+            } else {
+                alert(result.message);
+            }
+        }
+    });
+}
+
+function deleteStorage(ele) {
+    const id = $(ele).attr("data-id");
+    if (confirm("Are you sure about that ???")) {
+        $.ajax({
+            type: "DELETE",
+            url: `${domain}storage/${id}`,
+            success: (result) => {
+                if (result.status == "success") {
+                    alert(result.status);
+                    location.reload();
+                } else {
+                    alert(result.message);
+                }
+            }
+        });
+    }
+}
+
+function selectProduct(ele) {
+    const id = $(ele).attr('data-id');
+    const name = $(ele).attr('data-name');
+    $("#addStorageProduct").val(name);
+    $("#addStorageProductId").val(id);
+}
 
 function checkSize(size) {
     $('input[name=updateSize]').attr('checked', false);

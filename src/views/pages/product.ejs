@@ -57,7 +57,8 @@
                                 <td style="border: 1px #000 solid;">
                                     <a href="javascript:void(0)" data-id="<%- product.id %>"
                                         onclick="getProduct(this)">Edit</a>
-                                    <a href="javascript:void(0)" style="color: red;">Delete</a>
+                                    <a href="javascript:void(0)" style="color: red;" data-id="<%- product.id %>"
+                                        onclick="deleteProduct(this)">Delete</a>
                                 </td>
                             </tr>
                             <% }); %>
@@ -180,7 +181,7 @@
                     </select>
                 </div>
 
-                <button id="addProduct">Sửa</button>
+                <button id="addProduct">Thêm</button>
             </div>
         </div>
     </div>

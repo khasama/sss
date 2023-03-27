@@ -2,6 +2,9 @@ const ProductController = require("./product.controller");
 const CategoryController = require("./category.controller");
 const StaffController = require("./staff.controller");
 const MembershipController = require("./membership.controller");
+const StorageController = require("./storage.controller");
+const OrderController = require("./order.controller");
+const BranchController = require("./branch.controller");
 
 const BranchModel = require("../../models/branch.model");
 
@@ -22,7 +25,8 @@ module.exports = {
     CategoryController,
     StaffController,
     MembershipController,
-    // UserController,
-    // ToolController,
+    StorageController,
+    OrderController,
+    BranchController,
     AdminController,
 }

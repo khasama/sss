@@ -4,7 +4,7 @@ const OrderModel = {}
 
 OrderModel.getAllOrder = async () => {
     try {
-        const result = await pool.query(`select from tb_orders`);
+        const result = await pool.query(`select * from tb_orders`);
         return result.recordset;
     } catch (error) {
         throw error;
