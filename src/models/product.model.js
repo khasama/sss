@@ -42,7 +42,8 @@ ProductModel.getProduct = async (id) => {
                 on p.id_category = c.id
                 where p.id = @id
             `);
-        if (result.recordset > 0) return result.recordset[0];
+
+        if (result.recordset.length > 0) return result.recordset[0];
         return false;
     } catch (error) {
         throw error;
@@ -85,7 +86,7 @@ ProductModel.deleteProduct = async (id) => {
                 set deleted = 1
                 where id = @id;
             `);
-        if (result.rowsAffected[0] > 0) return result.recordset[0];
+        if (result.rowsAffected[0] > 0) return true;
         return false;
     } catch (error) {
         throw error;

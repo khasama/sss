@@ -190,6 +190,36 @@ $(document).ready(function () {
             });
         }
     });
+
+    $("#addProduct").click(() => {
+        const name = $("#addProductName").val().trim();
+        const image = $("#addProductImage").val().trim();
+        const price = $("#addProductPrice").val();
+        const idCategory = $("#addProductCategory").val();
+        const sizeChecked = $('input[name=addSize]:checked');
+        if (name && image && price && sizeChecked.length > 0 && idCategory) {
+            sizeChecked.each(ele => {
+                $(ele).remove()
+            })
+            // $.ajax({
+            //     type: "POST",
+            //     url: `${domain}product/`,
+            //     data: {
+            //         name,
+            //         phone,
+            //         level,
+            //     },
+            //     success: (result) => {
+            //         if (result.status == "success") {
+            //             alert(result.status);
+            //             location.reload();
+            //         } else {
+            //             alert(result.message);
+            //         }
+            //     }
+            // });
+        }
+    });
 });
 
 function getCategory(ele) {
@@ -300,4 +330,34 @@ function deleteMembership(ele) {
             }
         });
     }
+}
+
+function getProduct(ele) {
+    const id = $(ele).attr("data-id");
+    $.ajax({
+        url: `${domain}product/${id}`,
+        success: (result) => {
+            if (result.status == "success") {
+                const product = result.data;
+                $("#updateProductName").val(product.name);
+                $("#updateProductImage").val(product.image);
+                $("#productImage").attr('src', product.image);
+                $("#updateProductPrice").val(product.price);
+                $("#updateProductCategory").val(product.id_category);
+                $("#updateMemberId").val(product.id);
+                const allSize = product.size.split('|');
+                checkSize(allSize);
+            } else {
+                alert(result.message);
+            }
+        }
+    });
+}
+
+
+function checkSize(size) {
+    $('input[name=updateSize]').attr('checked', false);
+    size.forEach(element => {
+        $(`#size-${element}`).attr('checked', true);
+    });
 }

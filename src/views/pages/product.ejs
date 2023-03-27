@@ -19,11 +19,12 @@
                     <thead>
                         <tr>
                             <th style="border: 1px #000 solid;">ID</th>
-                            <th style="border: 1px #000 solid;">Tên</th>
-                            <th style="border: 1px #000 solid;">Ảnh</th>
+                            <th style="border: 1px #000 solid;">Name</th>
+                            <th style="border: 1px #000 solid;">Image</th>
                             <th style="border: 1px #000 solid;">Size</th>
-                            <th style="border: 1px #000 solid;">Giá</th>
-                            <th style="border: 1px #000 solid;">Loại</th>
+                            <th style="border: 1px #000 solid;">Price</th>
+                            <th style="border: 1px #000 solid;">Category</th>
+                            <th style="border: 1px #000 solid;">Deleted</th>
                             <th style="border: 1px #000 solid;">
                                 <a href="javascript:void(0)">➕</a>
                             </th>
@@ -51,7 +52,11 @@
                                     <%- product.category %>
                                 </td>
                                 <td style="border: 1px #000 solid;">
-                                    <a href="javascript:void(0)">Edit</a>
+                                    <%- product.deleted ? 'True' : 'False' %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <a href="javascript:void(0)" data-id="<%- product.id %>"
+                                        onclick="getProduct(this)">Edit</a>
                                     <a href="javascript:void(0)" style="color: red;">Delete</a>
                                 </td>
                             </tr>
@@ -60,32 +65,67 @@
                 </table>
             </div>
             <div style="margin-left: 15px;">
+                <h3>Sửa</h3>
                 <div style="margin: 10px 0;">
-                    <label for="name">Tên sản phẩm:</label>
-                    <input type="text" id="name">
+                    <label for="Name">Tên sản phẩm:</label>
+                    <input type="text" id="updateProductName">
                 </div>
                 <div style="margin: 10px 0;">
-                    <label for="image">Ảnh:</label>
-                    <input type="text" id="image">
+                    <label for="Image">Ảnh:</label>
+                    <input type="text" id="updateProductImage">
+                    <img src="" id="productImage" width="100">
                 </div>
                 <div style="margin: 10px 0;">
-                    <label for="price">Giá:</label>
-                    <input type="number" id="price">
+                    <label for="Price">Giá:</label>
+                    <input type="number" id="updateProductPrice">
                 </div>
                 <div style="margin: 10px 0;">
-                    <label for="name">Size:</label>
-                    <div style="display: flex;">
-                        <div style="margin: 0 5px;"><input type="checkbox" value="30">30</div>
-                        <div style="margin: 0 5px;"><input type="checkbox" value="31">31</div>
-                        <div style="margin: 0 5px;"><input type="checkbox" value="32">32</div>
-                        <div style="margin: 0 5px;"><input type="checkbox" value="33">33</div>
-                        <div style="margin: 0 5px;"><input type="checkbox" value="34">34</div>
-                        <div style="margin: 0 5px;"><input type="checkbox" value="35">35</div>
+                    <label for="Size">Size:</label>
+                    <div style="display: flex;flex-wrap: wrap;">
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-30" value="30">30
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-31" value="31">31
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-32" value="32">32
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-33" value="33">33
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-34" value="34">34
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-35" value="35">35
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-36" value="36">36
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-37" value="37">37
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-38" value="38">38
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-39" value="39">39
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-40" value="40">40
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-41" value="41">41
+                        </div>
+                        <div style="margin: 0 5px;">
+                            <input type="checkbox" name="updateSize" id="size-42" value="42">42
+                        </div>
                     </div>
                 </div>
                 <div style="margin: 10px 0;">
-                    <label for="category">Loại:</label>
-                    <select name="category" id="category">
+                    <label for="Category">Category:</label>
+                    <select id="updateProductCategory">
                         <% categories.forEach(category=> { %>
                             <option value="<%- category.id %>">
                                 <%- category.category %>
@@ -93,7 +133,54 @@
                             <% }) %>
                     </select>
                 </div>
-                <button id="addProduct">Thêm</button>
+                <input type="hidden" id="updateProductId">
+
+                <button id="updateProduct">Sửa</button>
+            </div>
+            <div style="margin-left: 15px;">
+                <h3>Thêm</h3>
+                <div style="margin: 10px 0;">
+                    <label for="Name">Tên sản phẩm:</label>
+                    <input type="text" id="addProductName">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Image">Ảnh:</label>
+                    <input type="text" id="addProductImage">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Price">Giá:</label>
+                    <input type="number" id="addProductPrice">
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Size">Size:</label>
+                    <div style="display: flex;flex-wrap: wrap;">
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="30">30</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="31">31</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="32">32</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="33">33</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="34">34</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="35">35</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="36">36</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="37">37</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="38">38</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="39">39</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="40">40</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="41">41</div>
+                        <div style="margin: 0 5px;"><input type="checkbox" name="addSize" value="42">42</div>
+                    </div>
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Category">Category:</label>
+                    <select id="addProductCategory">
+                        <% categories.forEach(category=> { %>
+                            <option value="<%- category.id %>">
+                                <%- category.category %>
+                            </option>
+                            <% }) %>
+                    </select>
+                </div>
+
+                <button id="addProduct">Sửa</button>
             </div>
         </div>
     </div>
