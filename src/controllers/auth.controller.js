@@ -7,7 +7,6 @@ AuthController.login = async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
         if (username && password) {
-            // console.log({ username, password });
             const staff = await StaffModel.login(username);
             if (staff) {
                 const hashPass = staff.password;
@@ -27,7 +26,6 @@ AuthController.login = async (req, res) => {
                         .json({ status: "error", message: "Sai pass" });
                 }
             } else {
-                // logger.warn("not found");
                 return res.status(200).json({
                     status: "error",
                     message: "Nhân viên không tồn tại ở chi nhánh này",
@@ -47,5 +45,9 @@ AuthController.loginPage = async (req, res) => {
     return res.render('login', { domain: global.domain });
 }
 
+AuthController.logout = async (req, res) => {
+    req.session.destroy();
+    return res.redirect("/login");
+}
 
 module.exports = AuthController;

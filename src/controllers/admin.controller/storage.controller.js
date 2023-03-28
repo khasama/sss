@@ -7,7 +7,7 @@ StorageController.storagePage = async (req, res) => {
     try {
         const storages = await StorageModel.getAllStorage();
         const products = await ProductModel.getAllProductNotDelete();
-        return res.render("pages/storage", { domain: global.domain, branch: global.branch, storages, products });
+        return res.render("pages/storage", { domain: global.domain, branch: global.branch, storages, products, user: req.session.user });
     } catch (error) {
     }
 };

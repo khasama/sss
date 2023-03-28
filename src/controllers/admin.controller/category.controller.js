@@ -6,7 +6,7 @@ const CategoryController = {};
 CategoryController.categoryPage = async (req, res) => {
     try {
         const categories = await CategoryModel.getAllCategory();
-        return res.render("pages/category", { domain: global.domain, branch: global.branch, categories });
+        return res.render("pages/category", { domain: global.domain, branch: global.branch, categories, user: req.session.user });
     } catch (error) {
     }
 };

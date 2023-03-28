@@ -7,7 +7,7 @@ ProductController.productPage = async (req, res) => {
     try {
         const products = await ProductModel.getAllProduct();
         const categories = await CategoryModel.getAllCategory();
-        return res.render("pages/product", { domain: global.domain, branch: global.branch, products, categories });
+        return res.render("pages/product", { domain: global.domain, branch: global.branch, products, categories, user: req.session.user });
     } catch (error) {
         // logger.error(error.stack || error);
     }

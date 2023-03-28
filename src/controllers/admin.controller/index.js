@@ -14,7 +14,7 @@ AdminController.dashboard = async (req, res) => {
     try {
         const currentBranch = await BranchModel.currentBranch();
         global.branch = currentBranch;
-        return res.render("", { domain: global.domain, branch: global.branch });
+        return res.render("", { domain: global.domain, branch: global.branch, user: req.session.user });
     } catch (error) {
         // logger.error(error.stack || error);
     }

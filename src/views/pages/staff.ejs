@@ -7,7 +7,7 @@
 
 <body>
     <header>
-        <%- include('../partials/header', {branch}) %>
+        <%- include('../partials/header', {branch, user}) %>
     </header>
 
     <div>
@@ -106,6 +106,7 @@
                     <select id="updateStaffRole">
                         <option value="manager">Manager</option>
                         <option value="cashier">Cashier</option>
+                        <option value="storager">Storager</option>
                     </select>
                 </div>
                 <input type="hidden" id="updateStaffId">
@@ -146,6 +147,7 @@
                     <select id="addStaffRole">
                         <option value="manager">Manager</option>
                         <option value="cashier">Cashier</option>
+                        <option value="storager">Storager</option>
                     </select>
                 </div>
 

@@ -1,11 +1,14 @@
 <h3>Admin chi nhánh <%- branch.branch %></h3>
 
-<div style="display: flex;">
-    <a href="/product" style="margin: 0 5px;">Sản phẩm</a>
-    <a href="/category" style="margin: 0 5px;">Thể loại</a>
-    <a href="/staff" style="margin: 0 5px;">Nhân viên</a>
-    <a href="/storage" style="margin: 0 5px;">Kho</a>
-    <a href="/order" style="margin: 0 5px;">Đơn hàng</a>
-    <a href="/membership" style="margin: 0 5px;">Thành viên</a>
-    <a href="/branch" style="margin: 0 5px;">Chi nhánh</a>
-</div>
+<% if(user){ %> <a href="/logout">Logout</a>
+    <% } %>
+
+        <div style="display: flex;">
+            <a href="/product" style="margin: 0 5px;">Sản phẩm</a>
+            <a href="/category" style="margin: 0 5px;">Thể loại</a>
+            <a href="/staff" style="margin: 0 5px;">Nhân viên</a>
+            <a href="/storage" style="margin: 0 5px;">Kho</a>
+            <a href="/order" style="margin: 0 5px;">Đơn hàng</a>
+            <a href="/membership" style="margin: 0 5px;">Thành viên</a>
+            <a href="/branch" style="margin: 0 5px;">Chi nhánh</a>
+        </div>

@@ -498,6 +498,41 @@ function selectProduct(ele) {
     $("#addStorageProductId").val(id);
 }
 
+function getOrderDetail(ele) {
+    const id = $(ele).attr('data-id');
+    $.ajax({
+        url: `${domain}order/${id}`,
+        success: (result) => {
+            if (result.status == "success") {
+                const order = result.data.order;
+                const details = result.data.detail;
+                $("#orderDetailCtn").html("");
+                for (const detail of details) {
+                    $("#orderDetailCtn").append(
+                        `
+                        <tr>
+                            <td style="border: 1px #000 solid;">
+                                ${detail.name}
+                            </td>
+                            <td style="border: 1px #000 solid;">
+                                ${detail.quantity}
+                            </td>
+                            <td style="border: 1px #000 solid;">
+                                ${detail.price}
+                            </td>
+                        </tr>
+                        `
+                    );
+                }
+                $("#updateOrderCustomer").val(order.customer);
+                $("#updateOrderTotal").val(order.total);
+            } else {
+                alert(result.message);
+            }
+        }
+    });
+}
+
 function checkSize(size) {
     $('input[name=updateSize]').attr('checked', false);
     size.forEach(element => {

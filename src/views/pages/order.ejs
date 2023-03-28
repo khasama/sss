@@ -7,7 +7,7 @@
 
 <body>
     <header>
-        <%- include('../partials/header', {branch}) %>
+        <%- include('../partials/header', {branch, user}) %>
     </header>
 
     <div>
@@ -18,6 +18,7 @@
                 <table style="border: 1px #000 solid;">
                     <thead>
                         <tr>
+                            <th style="border: 1px #000 solid;">ID</th>
                             <th style="border: 1px #000 solid;">Customer</th>
                             <th style="border: 1px #000 solid;">Total</th>
                             <th style="border: 1px #000 solid;">
@@ -29,6 +30,9 @@
                         <% orders.forEach(order=> { %>
                             <tr id="order-<%- order.id; %>">
                                 <td style="border: 1px #000 solid;">
+                                    <%- order.id %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
                                     <%- order.customer %>
                                 </td>
                                 <td style="border: 1px #000 solid;">
@@ -36,10 +40,8 @@
                                 </td>
 
                                 <td style="border: 1px #000 solid;">
-                                    <a href="javascript:void(0)" onclick="getStorage(this)"
-                                        data-id="<%- order.id %>">Edit</a>
-                                    <a href="javascript:void(0)" style="color: red;" onclick="deleteStorage(this)"
-                                        data-id="<%- order.id %>">Delete</a>
+                                    <a href="javascript:void(0)" onclick="getOrderDetail(this)"
+                                        data-id="<%- order.id %>">Detail</a>
                                 </td>
 
                             </tr>
@@ -48,18 +50,27 @@
                 </table>
             </div>
             <div style="margin-left: 15px;">
-                <h3>Sửa</h3>
+                <h3>Thông tin đơn hàng</h3>
                 <div style="margin: 10px 0;">
-                    <label for="Product">Sản phẩm:</label>
-                    <input type="text" id="updateStorageProduct" disabled>
+                    <label for="Customer">Tên người mua:</label>
+                    <input type="text" id="updateOrderCustomer" disabled>
                 </div>
                 <div style="margin: 10px 0;">
-                    <label for="Quantity">Số lượng:</label>
-                    <input type="text" id="updateStorageQuantity">
+                    <label for="Total">Tổng tiền:</label>
+                    <input type="text" id="updateOrderTotal">
                 </div>
-                <input type="hidden" id="updateStorageId">
+                <table style="border: 1px #000 solid;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px #000 solid;">Sản phẩm</th>
+                            <th style="border: 1px #000 solid;">Số lượng</th>
+                            <th style="border: 1px #000 solid;">Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderDetailCtn">
 
-                <button id="updateStorage">Sửa</button>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

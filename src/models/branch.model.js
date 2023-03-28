@@ -12,5 +12,20 @@ BranchModel.getAllBranch = async () => {
     return result.recordset;
 }
 
+BranchModel.updateBranch = async (id, branch, address) => {
+    const result = await pool.request()
+        .input('id', sql.Int, id)
+        .input('branch', sql.NVarChar, branch)
+        .input('address', sql.NVarChar, address)
+        .query(`
+                update LINKSERVER.sss.dbo.tb_branchs
+                set branch = @branch,
+                    address = @address
+                where id = @id
+            `);
+    if (result.recordset.length > 0) return result.recordset;
+    return false;
+}
+
 
 module.exports = BranchModel;

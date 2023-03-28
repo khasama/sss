@@ -27,7 +27,13 @@ OrderModel.getOrderDetail = async (idOrder) => {
     try {
         const result = await pool.request()
             .input('idOrder', sql.Int, idOrder)
-            .query("select * from tb_order_details where id_order = @idOrder");
+            .query(`
+            select d.*, p.name from tb_order_details d
+            inner join tb_products p
+            on d.id_product = p.id
+            where d.id_order = @idOrder
+
+            `);
         if (result.recordset.length > 0) return result.recordset;
         return false;
     } catch (error) {

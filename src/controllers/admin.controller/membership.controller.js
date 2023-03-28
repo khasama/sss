@@ -6,7 +6,7 @@ const MembershipController = {};
 MembershipController.membershipPage = async (req, res) => {
     try {
         const memberships = await MembershipModel.getAllMembership();
-        return res.render("pages/membership", { domain: global.domain, branch: global.branch, memberships });
+        return res.render("pages/membership", { domain: global.domain, branch: global.branch, memberships, user: req.session.user });
     } catch (error) {
     }
 };

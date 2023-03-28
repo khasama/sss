@@ -6,7 +6,7 @@ const StaffController = {};
 StaffController.staffPage = async (req, res) => {
     try {
         const staffs = await StaffModel.getAllStaff();
-        return res.render("pages/staff", { domain: global.domain, branch: global.branch, staffs });
+        return res.render("pages/staff", { domain: global.domain, branch: global.branch, staffs, user: req.session.user });
     } catch (error) {
     }
 };
