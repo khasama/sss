@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch, user}) %>
+    </header>
+    <!-- Add modal -->
+    <div id="addModal" class="modal py-5 px-5">
+        <!-- Modal content -->
+        <div class="modal-lg modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button"
+                        class="badge badge-outline-danger mx-0 my-0 px-2 py-0 d-block closeAdd close text-danger bg-light"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-wrap container-fluid search">
+                        <div class="col-6 col-sm-6 py-1">
+                            <label for="Product"><small>Sản phẩm:</small></label>
+                            <input type="text" id="addStorageProduct" disabled>
+                            <input type="hidden" id="addStorageProductId">
+                        </div>
+                        <div class="col-6 col-sm-6 py-1">
+                            <label for="Quantity">Số lượng:</label>
+                            <input type="text" id="addStorageQuantity">
+                        </div>
+
+                        <div class="d-flex flex-row col-12 col-sm-12 pt-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% products.slice(0,20).forEach(product=> { %>
+                                        <tr>
+                                            <td>
+                                                <%- product.id %>
+                                            </td>
+                                            <td class="limit-word"><a class="rounded-circle text-warning "
+                                                    href=" javascript:void(0)" data-id="<%- product.id %>"
+                                                    data-name="<%- product.name %>" onclick="selectProduct(this)">
+                                                    <%- product.name %></a>
+                                            </td>
+                                            <td>
+                                                <a class="rounded-circle text-warning " href=" javascript:void(0)"
+                                                    data-id="<%- product.id %>" data-name="<%- product.name %>"
+                                                    onclick="selectProduct(this)"><i
+                                                        class="mdi mdi-check-circle-outline"></i></a>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="rounded px-5 py-3 text-white float-right badge bg-success" id="addStorage">
+                            <b class="fs-1">Thêm</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-scroller">
+        <%- include('../partials/sidebar',{branch}) %>
+            <div class="container-fluid page-body-wrapper">
+                <!-- The Modal -->
+                <div class="main-panel pt-0">
+                    <div class="content-wrapper">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Storage</h4>
+                                <div class="container-fluid d-flex flex-column">
+                                    <div class="row">
+                                        <div class="table-responsive col-12 col-lg-8 col-sm-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Quantity</th>
+                                                        <th>
+                                                            <a class="badge badge-outline-success w-100 fs-1" id="add"
+                                                                href="javascript:void(0)"><i
+                                                                    class="mdi mdi-plus-circle-multiple-outline"></i>
+                                                                Add</a>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% storages.slice(0,20).forEach(storage=> { %>
+                                                        <tr id="storage-<%- storage.id; %>">
+                                                            <td class="limit-word">
+                                                                <%- storage.name %>
+                                                            </td>
+                                                            <td>
+                                                                <%- storage.quantity %>
+                                                            </td>
+
+                                                            <td>
+                                                                <a id="edit" class="badge badge-outline-warning"
+                                                                    href="javascript:void(0)" onclick="getStorage(this)"
+                                                                    data-id="<%- storage.id %>">Edit</a>
+                                                                <a href="javascript:void(0)"
+                                                                    class="badge badge-outline-danger"
+                                                                    onclick="deleteStorage(this)"
+                                                                    data-id="<%- storage.id %>">Delete</a>
+                                                            </td>
+
+                                                        </tr>
+                                                        <% }); %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-12 col-lg-4 col-sm-12">
+                                            <div class=" py-4 px-4 modal-content border border-5 rounded">
+                                                <h3>Sửa</h3>
+                                                <div>
+                                                    <label for="Product">Sản phẩm:</label>
+                                                    <input type="text" id="updateStorageProduct" disabled>
+                                                </div>
+                                                <div>
+                                                    <label for="Quantity">Số lượng:</label>
+                                                    <input type="text" id="updateStorageQuantity">
+                                                </div>
+                                                <input type="hidden" id="updateStorageId">
+
+                                                <button
+                                                    class="text-white bg-primary badge py-2 w-75 align-self-center mt-2"
+                                                    id="updateStorage"><i
+                                                        class="display-4 justify-content-center mdi d-flex mdi-circle-edit-outline"></i><b>Sửa</b></button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%- include('../partials/foot') %>
+                        <%- include('../partials/footer') %>
+</body>
+
+</html>

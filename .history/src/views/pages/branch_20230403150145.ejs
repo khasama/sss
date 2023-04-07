@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch, user}) %>
+    </header>
+    <div class="container-scroller">
+        <%- include('../partials/sidebar',{branch}) %>
+            <div class="container-fluid page-body-wrapper">
+                <!-- The Modal -->
+                <div class="main-panel pt-0">
+                    <div class="content-wrapper">
+                        <div class="card">
+                            <div class="card-body pr-0">
+                                <h4 class="card-title">Branch</h4>
+                                <div class="container-fluid d-flex flex-column">
+                                    <div class="row">
+                                        <div class="table-responsive col-lg-8 col-12 col-sm-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Branch</th>
+                                                        <th>Address</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% branches.forEach(branch=> { %>
+                                                        <tr id="branch-<%- branch.id; %>">
+                                                            <td>
+                                                                <%- branch.id %>
+                                                            </td>
+                                                            <td>
+                                                                <%- branch.branch %>
+                                                            </td>
+                                                            <td>
+                                                                <%- branch.address %>
+                                                            </td>
+
+                                                            <td>
+                                                                <a href="javascript:void(0)" onclick="getBranch(this)"
+                                                                    data-id="<%- branch.id %>">Edit</a>
+                                                            </td>
+                                                        </tr>
+                                                        <% }); %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-12 col-lg-4 col-sm-12">
+                                            <div>
+                                                <h3>Sửa</h3>
+                                                <div>
+                                                    <label for="Name">Chi nhánh:</label>
+                                                    <input type="text" id="updateBranchName">
+                                                </div>
+                                                <div>
+                                                    <label for="Address">Địa chỉ:</label>
+                                                    <input type="text" id="updateBranchAddress">
+                                                </div>
+                                                <input type="hidden" id="updateBranchId">
+
+                                                <button id="updateBranch">Sửa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('../partials/foot') %>
+</body>
+
+</html>

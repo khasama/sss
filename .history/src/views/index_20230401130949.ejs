@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', {domain}) %>
+</head>
+
+<body>
+
+    <%- include('../public/assets/js/dashboard.js', {products,quantity}) %>
+        <%- include('partials/header', {branch}) %>
+            <div class="container-scroller">
+                <%- include('partials/sidebar',{branch}) %>
+                    <%- include('pages/dashboard',{products}) %>
+
+            </div>
+            <%- include('partials/foot') %>
+</body>
+
+</html>

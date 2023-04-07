@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch, user}) %>
+    </header>
+    <!-- Add modal -->
+    <div id="addModal" class="modal py-5 px-5">
+        <!-- Modal content -->
+        <div class="modal-lg modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button"
+                        class="badge badge-outline-danger mx-0 my-0 px-2 py-0 d-block closeAdd close text-danger bg-light"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-wrap container-fluid search">
+                        <div class="col-6 col-sm-6 py-1">
+                            <label for="Product"><small>Sản phẩm:</small></label>
+                            <input type="text" id="addStorageProduct" disabled>
+                            <input type="hidden" id="addStorageProductId">
+                        </div>
+                        <div class="col-6 col-sm-6 py-1">
+                            <label for="Quantity">Số lượng:</label>
+                            <input type="text" id="addStorageQuantity">
+                        </div>
+
+                        <div class="d-flex flex-row col-12 col-sm-12 pt-3">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% products.forEach(product=> { %>
+                                        <tr>
+                                            <td>
+                                                <%- product.id; %>
+                                            </td>
+                                            <td>
+                                                <%- product.name %>
+                                            </td>
+                                            <td>
+                                                <a class="rounded-circle" href=" javascript:void(0)"
+                                                    data-id="<%- product.id %>" data-name="<%- product.name %>"
+                                                    onclick="selectProduct(this)"><i
+                                                        class="mdi mdi-check-circle-outline"></i></a>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="rounded px-5 py-3 text-white float-right badge bg-success" id="addProduct">
+                            <b class="fs-1">Thêm</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-scroller">
+        <%- include('../partials/sidebar',{branch}) %>
+            <div class="container-fluid page-body-wrapper">
+                <!-- The Modal -->
+                <div class="main-panel pt-0">
+                    <div class="content-wrapper">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Storage</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Quantity</th>
+                                                <th>
+                                                    <a class="badge badge-outline-success w-100 fs-1" id="add"
+                                                        href="javascript:void(0)"><i
+                                                            class="mdi mdi-plus-circle-multiple-outline"></i>
+                                                        Add</a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% storages.forEach(storage=> { %>
+                                                <tr id="storage-<%- storage.id; %>">
+                                                    <td>
+                                                        <%- storage.name %>
+                                                    </td>
+                                                    <td>
+                                                        <%- storage.quantity %>
+                                                    </td>
+
+                                                    <td>
+                                                        <a id="edit" class="badge badge-outline-warning"
+                                                            href="javascript:void(0)" onclick="getStorage(this)"
+                                                            data-id="<%- storage.id %>">Edit</a>
+                                                        <a href="javascript:void(0)" class="badge badge-outline-danger"
+                                                            onclick="deleteStorage(this)"
+                                                            data-id="<%- storage.id %>">Delete</a>
+                                                    </td>
+
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-left: 15px;">
+                        <h3>Sửa</h3>
+                        <div style="margin: 10px 0;">
+                            <label for="Product">Sản phẩm:</label>
+                            <input type="text" id="updateStorageProduct" disabled>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Quantity">Số lượng:</label>
+                            <input type="text" id="updateStorageQuantity">
+                        </div>
+                        <input type="hidden" id="updateStorageId">
+
+                        <button id="updateStorage">Sửa</button>
+                    </div>
+
+                    <!-- <div style="margin-left: 15px;">
+                        <h3>Thêm</h3>
+                        <div style="margin: 10px 0;">
+                            <label for="Product">Sản phẩm:</label>
+                            <input type="text" id="addStorageProduct" disabled>
+                            <input type="hidden" id="addStorageProductId">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Quantity">Số lượng:</label>
+                            <input type="text" id="addStorageQuantity">
+                        </div>
+
+                        <button id="addStorage">Thêm</button>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>
+                                        <a href="javascript:void(0)">🛠</a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% products.forEach(product=> { %>
+                                    <tr>
+                                        <td>
+                                            <%- product.id; %>
+                                        </td>
+                                        <td>
+                                            <%- product.name %>
+                                        </td>
+                                        <td>
+                                            <a href="javascript:void(0)" data-id="<%- product.id %>"
+                                                data-name="<%- product.name %>" onclick="selectProduct(this)">Select</a>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div> -->
+
+                </div>
+            </div>
+            <%- include('../partials/foot') %>
+</body>
+
+</html>

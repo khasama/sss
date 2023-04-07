@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        const myVariable = "<%- myData %>";
+        const myElement = document.querySelector('#my-element');
+        myElement.dataset.myVariable = myVariable;
+    </script>
+    <%- include('partials/head', {domain}) %>
+</head>
+
+<body>
+    <%- include('partials/header', {branch}) %>
+        <div class="container-scroller">
+            <%- include('partials/sidebar',{branch}) %>
+                <%- include('pages/dashboard',{products}) %>
+
+        </div>
+        <%- include('partials/foot') %>
+
+</body>
+
+</html>

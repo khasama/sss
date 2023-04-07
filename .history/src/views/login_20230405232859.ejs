@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', {domain}) %>
+</head>
+
+<body>
+    <div class="container w-25 h-100 mt-5 box">
+        <div class="d-flex justify-content-center flex-column align-content-center mt-5">
+            <label for="username">username:</label>
+            <input type="text" id="username"> <br>
+            <label for="password">password:</label>
+            <input type="password" id="password"> <br>
+            <button class="py-1 badge-outline-primary" id="login-btn">Login</button>
+        </div>
+    </div>
+
+    <%- include('partials/foot') %>
+</body>
+
+</html>

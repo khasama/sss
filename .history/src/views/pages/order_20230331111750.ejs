@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../components/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../components/header', {branch, user}) %>
+    </header>
+
+    <div>
+        <h3>Quản lý Đơn hàng</h3>
+
+        <div style="display: flex;">
+            <div>
+                <table style="border: 1px #000 solid;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px #000 solid;">ID</th>
+                            <th style="border: 1px #000 solid;">Customer</th>
+                            <th style="border: 1px #000 solid;">Total</th>
+                            <th style="border: 1px #000 solid;">
+                                <a href="javascript:void(0)">🛠</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% orders.forEach(order=> { %>
+                            <tr id="order-<%- order.id; %>">
+                                <td style="border: 1px #000 solid;">
+                                    <%- order.id %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- order.customer %>
+                                </td>
+                                <td style="border: 1px #000 solid;">
+                                    <%- order.total %>
+                                </td>
+
+                                <td style="border: 1px #000 solid;">
+                                    <a href="javascript:void(0)" onclick="getOrderDetail(this)"
+                                        data-id="<%- order.id %>">Detail</a>
+                                </td>
+
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-left: 15px;">
+                <h3>Thông tin đơn hàng</h3>
+                <div style="margin: 10px 0;">
+                    <label for="Customer">Tên người mua:</label>
+                    <input type="text" id="updateOrderCustomer" disabled>
+                </div>
+                <div style="margin: 10px 0;">
+                    <label for="Total">Tổng tiền:</label>
+                    <input type="text" id="updateOrderTotal">
+                </div>
+                <table style="border: 1px #000 solid;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px #000 solid;">Sản phẩm</th>
+                            <th style="border: 1px #000 solid;">Số lượng</th>
+                            <th style="border: 1px #000 solid;">Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderDetailCtn">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../components/foot') %>
+</body>
+
+</html>

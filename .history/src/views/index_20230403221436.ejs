@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('partials/head', {domain}) %>
+</head>
+
+<body>
+    <div id="my-element" data-my-variable="<%- branch.branch %>">
+        <script src="../public/js/main.js"></script>
+    </div>
+    <%- include('partials/header', {branch}) %>
+        <div class="container-scroller">
+            <%- include('partials/sidebar',{branch}) %>
+                <%- include('pages/dashboard',{products}) %>
+
+        </div>
+        <%- include('partials/foot') %>
+
+</body>
+
+</html>

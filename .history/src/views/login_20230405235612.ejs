@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head', {domain}) %>
+</head>
+
+<body id="signin">
+    <div class="container-fluid h-100 py-5 position-absolute bg-sign">
+        <div class="d-flex justify-content-center flex-column align-content-center box">
+            <label for="username"><small>Username:</small></label>
+            <input type="text" id="username" placeholder="Username... "> <br>
+            <label for="password"><small>Password:</small></label>
+            <input type="password" id="password" placeholder="******"> <br>
+            <button class="py-1 bg-success rounded bg-gradient-success" id="login-btn"><b>Login</b></button>
+        </div>
+    </div>
+
+    <%- include('partials/foot') %>
+</body>
+
+</html>

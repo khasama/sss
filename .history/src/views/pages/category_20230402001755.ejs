@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch, user}) %>
+    </header>
+    <div class="container-scroller">
+        <%- include('../partials/sidebar',{branch}) %>
+            <div class="container-fluid page-body-wrapper">
+                <!-- The Modal -->
+                <div class="main-panel pt-0">
+                    <div class="content-wrapper">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Category</h4>
+                                <div class="container-fluid d-flex flex-row">
+                                    <div class="table-responsive col-8 col-sm-8">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Hãng</th>
+                                                    <th>
+                                                        <a class="badge badge-outline-success w-100 fs-1" id="add"
+                                                            href="javascript:void(0)"><i
+                                                                class="mdi mdi-plus-circle-multiple-outline"></i>
+                                                            Add</a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% categories.forEach(category=> { %>
+                                                    <tr id="category-<%- category.id; %>">
+                                                        <td>
+                                                            <%- category.id; %>
+                                                        </td>
+                                                        <td class="limit-word">
+                                                            <%- category.category %>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <a id="edit" class="badge badge-outline-warning"
+                                                                href="javascript:void(0)" data-id="<%- category.id %>"
+                                                                onclick="getCategory(this)">Edit</a>
+                                                            <a class="badge badge-outline-danger"
+                                                                href="javascript:void(0)" data-id="<%- category.id %>"
+                                                                onclick="deleteCategory(this)">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                    <% }); %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-4 col-sm-4">
+                                        <div class="card py-2">
+                                            <h3>Sửa</h3>
+                                            <div style="margin: 10px 0;">
+                                                <label for="category">Hãng:</label>
+                                                <input type="text" id="updateCategoryName">
+                                                <input type="hidden" id="updateCategoryId">
+                                            </div>
+                                            <button id="updateCategory">Sửa</button>
+                                        </div>
+                                        <div class="card py-2">
+                                            <h3>Thêm</h3>
+                                            <div style="margin: 10px 0;">
+                                                <label for="category">Hãng:</label>
+                                                <input type="text" id="addCategoryName">
+                                            </div>
+
+                                            <button id="addCategory">Thêm</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <%- include('../partials/foot') %>
+</body>
+
+</html>

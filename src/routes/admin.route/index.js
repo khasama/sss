@@ -15,11 +15,22 @@ const StorageRoute = require("./storage.route");
 router.use("/product", verifyRole(["admin", "manager"]), ProductRoute);
 router.use("/category", verifyRole(["admin", "manager"]), CategoryRoute);
 router.use("/staff", verifyRole(["admin", "manager"]), StaffRoute);
-router.use("/membership", verifyRole(["admin", "manager", "cashier"]), MembershipRoute);
-router.use("/order", verifyRole(["admin", "manager", , "cashier", "storager"]), OrderRoute);
+router.use(
+  "/membership",
+  verifyRole(["admin", "manager", "cashier"]),
+  MembershipRoute
+);
+router.use(
+  "/order",
+  verifyRole(["admin", "manager", , "cashier", "storager"]),
+  OrderRoute
+);
 router.use("/branch", verifyRole(["admin", "manager"]), BranchRoute);
-router.use("/storage", verifyRole(["admin", "manager", , "cashier", "storager"]), StorageRoute);
-
+router.use(
+  "/storage",
+  verifyRole(["admin", "manager", , "cashier", "storager"]),
+  StorageRoute
+);
 
 router.get("/", AdminController.dashboard);
 

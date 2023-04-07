@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% let myData={ foo: 'bar' } %>
+        <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch, user}) %>
+    </header>
+    <div class="container-scroller">
+        <%- include('../partials/sidebar',{branch}) %>
+            <div class="container-fluid page-body-wrapper">
+                <!-- The Modal -->
+                <div class="main-panel pt-0">
+                    <div class="content-wrapper">
+                        <div class="card">
+                            <div class="card-body pr-0">
+                                <h4 class="card-title">Order</h4>
+                                <div class="container-fluid d-flex flex-row">
+                                    <div class="row">
+                                        <div class="table-responsive col-lg-8 col-12 col-sm-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Customer</th>
+                                                        <th>Total</th>
+                                                        <!-- <th>
+                                            <a href="javascript:void(0)">🛠</a>
+                                        </th> -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% orders.forEach(order=> { %>
+                                                        <tr id="order-<%- order.id; %>">
+                                                            <td>
+                                                                <%- order.id %>
+                                                            </td>
+                                                            <td>
+                                                                <%- order.customer %>
+                                                            </td>
+                                                            <td>
+                                                                <%- order.total %>
+                                                            </td>
+
+                                                            <td>
+                                                                <a class="badge badge-outline-success"
+                                                                    href="javascript:void(0)"
+                                                                    onclick="getOrderDetail(this)"
+                                                                    data-id="<%- order.id %>">Detail</a>
+                                                            </td>
+
+                                                        </tr>
+                                                        <% }); %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-12 col-lg-4 col-sm-12">
+                                            <h3>Thông tin đơn hàng</h3>
+                                            <div>
+                                                <label for="Customer"><small>Tên người mua:</smal></label>
+                                                <input type="text" id="updateOrderCustomer" disabled>
+                                            </div>
+                                            <div>
+                                                <label for="Total"><small>Tổng tiền:</small></label>
+                                                <input type="text" id="updateOrderTotal">
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sản phẩm</th>
+                                                        <th>Số lượng</th>
+                                                        <th>Giá</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="orderDetailCtn">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </ro>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%- include('../partials/foot') %>
+</body>
+
+</html>

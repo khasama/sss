@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', {domain}) %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header', {branch, user}) %>
+    </header>
+    <!-- Add modal -->
+    <div id="addModal" class="modal py-5 px-5">
+        <!-- Modal content -->
+        <div class="modal-lg modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button"
+                        class="badge badge-outline-danger mx-0 my-0 px-2 py-0 d-block closeAdd close text-danger bg-light"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-wrap container-fluid search">
+                        <div class="col-6 col-sm-6">
+                            <label for="addStaffFullname"><small>Họ tên:</small></label>
+                            <input class="w-100" placeholder="Họ tên..." type="text" id="addStaffFullname">
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label for="addStaffAge"><small>Tuổi:</small></label>
+                            <input class="w-100" placeholder="Tuổi.." type="number" id="addStaffAge">
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label for="addStaffPhone"><small>Số điện thoại:</small></label>
+                            <input class="w-100" placeholder="Số điện thoại..." type="number" id="addStaffPhone">
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label for="addStaffGender">Giới tính:</label>
+                            <select id="addStaffGender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label for="Address">Địa chỉ:</label>
+                            <input type="text" id="addStaffAddress">
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label for="Email">Email:</label>
+                            <input type="text" id="addStaffEmail">
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label for="addStaffRole">Role:</label>
+                            <select id="addStaffRole">
+                                <option value="manager">Manager</option>
+                                <option value="cashier">Cashier</option>
+                                <option value="storager">Storager</option>
+                            </select>
+                        </div>
+                        <h5>Account</h5>
+                        <div class="col-6 col-sm-6">
+                            <label>Username:</label>
+                            <input type="text" id="addStaffUsername">
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label>Password:</label>
+                            <input type="password" id="addStaffPassword">
+                        </div>
+                        <div class="col-6 col-sm-6 d-flex flex-column justify-content-center">
+                            <label for="staff"><small>staff:</small></label>
+                            <!-- <select class="rounded px-3 py-2 text-white" id="addProductstaff">
+                                <% staffs.forEach(staff=> { %>
+                                    <option class="text-white" value="<%- staff.id %>">
+                                        <%- staff.staff %>
+                                    </option>
+                                    <% }) %>
+                            </select> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="rounded px-5 py-3 text-white float-right badge bg-success" id="addStaff">
+                            <b class="fs-1">Thêm</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-scroller">
+        <%- include('../partials/sidebar',{branch}) %>
+            <div class="container-fluid page-body-wrapper">
+                <!-- The Modal -->
+                <div class="main-panel pt-0">
+                    <div class="content-wrapper">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Staff</h4>
+                                <div class="table-responsive">
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Full name</th>
+                                                <th>Age</th>
+                                                <th>Phone</th>
+                                                <th>Gender</th>
+                                                <th>Address</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>
+                                                    <a class="badge badge-outline-success w-100 fs-1" id="add"
+                                                        href="javascript:void(0)"><i
+                                                            class="mdi mdi-plus-circle-multiple-outline"></i>
+                                                        Add</a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% staffs.forEach(staff=> { %>
+                                                <tr id="staff-<%- staff.id; %>">
+                                                    <td>
+                                                        <%- staff.id %>
+                                                    </td>
+                                                    <td>
+                                                        <%- staff.full_name %>
+                                                    </td>
+                                                    <td>
+                                                        <%- staff.age %>
+                                                    </td>
+                                                    <td>
+                                                        <%- staff.phone %>
+                                                    </td>
+                                                    <td>
+                                                        <%- staff.gender %>
+                                                    </td>
+                                                    <td class="limit-wordStaff">
+                                                        <%- staff.address %>
+                                                    </td>
+                                                    <td>
+                                                        <%- staff.email %>
+                                                    </td>
+                                                    <td>
+                                                        <%- staff.role %>
+                                                    </td>
+                                                    <td>
+                                                        <% if(staff.role=='admin' ){ %>
+                                                            <% } else { %>
+                                                                <a href="javascript:void(0)"
+                                                                    class="badge badge-outline-warning"
+                                                                    onclick="getStaff(this)"
+                                                                    data-id="<%- staff.id %>">Edit</a>
+                                                                <a href="javascript:void(0)"
+                                                                    class="badge badge-outline-danger"
+                                                                    onclick="deleteStaff(this)"
+                                                                    data-id="<%- staff.id %>">Delete</a>
+                                                                <% } %>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-left: 15px;">
+                        <h3>Sửa</h3>
+                        <div class="col-6 col-sm-6">
+                            <label for="fullname">Họ tên:</label>
+                            <input type="text" id="updateStaffFullname">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Age">Tuổi:</label>
+                            <input type="text" id="updateStaffAge">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Phone">Số điện thoại:</label>
+                            <input type="text" id="updateStaffPhone">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Gender">Giới tính:</label>
+                            <select id="updateStaffGender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Address">Địa chỉ:</label>
+                            <input type="text" id="updateStaffAddress">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Email">Email:</label>
+                            <input type="text" id="updateStaffEmail">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Role">Role:</label>
+                            <select id="updateStaffRole">
+                                <option value="manager">Manager</option>
+                                <option value="cashier">Cashier</option>
+                                <option value="storager">Storager</option>
+                            </select>
+                        </div>
+                        <input type="hidden" id="updateStaffId">
+
+                        <button id="updateStaff">Sửa</button>
+                    </div>
+                    <div style="margin-left: 15px;">
+                        <h3>Thêm</h3>
+                        <div style="margin: 10px 0;">
+                            <label for="fullname">Họ tên:</label>
+                            <input type="text" id="addStaffFullname">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Age">Tuổi:</label>
+                            <input type="number" id="addStaffAge">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Phone">Số điện thoại:</label>
+                            <input type="text" id="addStaffPhone">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Gender">Giới tính:</label>
+                            <select id="addStaffGender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Address">Địa chỉ:</label>
+                            <input type="text" id="addStaffAddress">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Email">Email:</label>
+                            <input type="text" id="addStaffEmail">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label for="Role">Role:</label>
+                            <select id="addStaffRole">
+                                <option value="manager">Manager</option>
+                                <option value="cashier">Cashier</option>
+                                <option value="storager">Storager</option>
+                            </select>
+                        </div>
+
+                        <h5>Account</h5>
+                        <div style="margin: 10px 0;">
+                            <label>Username:</label>
+                            <input type="text" id="addStaffUsername">
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <label>Password:</label>
+                            <input type="password" id="addStaffPassword">
+                        </div>
+
+                        <button id="addStaff">Thêm</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <%- include('../partials/foot') %>
+</body>
+
+</html>
