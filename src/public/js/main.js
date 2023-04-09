@@ -12,7 +12,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            alert(result.status);
+            // alert(result.status);
             window.location = "/";
           } else {
             alert(result.message);
