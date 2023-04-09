@@ -73,6 +73,7 @@ $(document).ready(function () {
     .off() // đảm bảo chỉ có một sự kiện được thực thi
     .click(() => {
       const category = $("#addCategoryName").val().trim();
+      console.log(category);
       if (category) {
         $.ajax({
           type: "POST",

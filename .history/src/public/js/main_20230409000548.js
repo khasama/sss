@@ -12,7 +12,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            alert(result.status);
+            // alert(result.status);
             window.location = "/";
           } else {
             alert(result.message);
@@ -38,7 +38,7 @@ $(document).ready(function () {
         data: { category },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -48,49 +48,26 @@ $(document).ready(function () {
     }
   });
 
-  // $("#addCategory").click(() => {
-  //   const category = $("#addCategoryName").val().trim();
-  //   console.log(category);
-  //   // if (category) {
-  //   //   $.ajax({
-  //   //     type: "POST",
-  //   //     url: `${domain}category/`,
-  //   //     data: {
-  //   //       category,
-  //   //     },
-  //   //     success: (result) => {
-  //   //       if (result.status == "success") {
-  //   //         // alert(result.status);
-  //   //         location.reload();
-  //   //       } else {
-  //   //         alert(result.message);
-  //   //       }
-  //   //     },
-  //   //   });
-  //   // }
-  // });
-  $("#addCategory")
-    .off() // đảm bảo chỉ có một sự kiện được thực thi
-    .click(() => {
-      const category = $("#addCategoryName").val().trim();
-      if (category) {
-        $.ajax({
-          type: "POST",
-          url: `${domain}category/`,
-          data: {
-            category,
-          },
-          success: (result) => {
-            if (result.status == "success") {
-              // alert(result.status);
-              location.reload();
-            } else {
-              alert(result.message);
-            }
-          },
-        });
-      }
-    });
+  $("#addCategory").click(() => {
+    const category = $("#addCategoryName").val().trim();
+    if (category) {
+      $.ajax({
+        type: "POST",
+        url: `${domain}category/`,
+        data: {
+          category,
+        },
+        success: (result) => {
+          if (result.status == "success") {
+            alert(result.status);
+            location.reload();
+          } else {
+            alert(result.message);
+          }
+        },
+      });
+    }
+  });
 
   $("#addStaff").click(() => {
     const fullName = $("#addStaffFullname").val().trim();
@@ -129,7 +106,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -163,7 +140,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -188,7 +165,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -214,7 +191,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -248,7 +225,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -283,7 +260,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -306,7 +283,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -318,22 +295,22 @@ $(document).ready(function () {
 
   $("#updateBranch").click(() => {
     const id = $("#updateBranchId").val().trim();
-    const branch = $("#updateBranchName").val();
+    const name = $("#updateBranchName").val();
     const address = $("#updateBranchAddress").val();
-    if (id && branch && address) {
+    if (id && name && address) {
       $.ajax({
         type: "PUT",
         url: `${domain}branch/${id}`,
         data: {
-          branch,
+          name,
           address,
         },
         success: (result) => {
           console.log("update", id);
-          console.log("name", branch);
+          console.log("name", name);
           console.log("address", address);
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -354,7 +331,7 @@ $(document).ready(function () {
         },
         success: (result) => {
           if (result.status == "success") {
-            // alert(result.status);
+            alert(result.status);
             location.reload();
           } else {
             alert(result.message);
@@ -414,7 +391,7 @@ function deleteCategory(ele) {
       url: `${domain}category/${id}`,
       success: (result) => {
         if (result.status == "success") {
-          // alert(result.status);
+          alert(result.status);
           $(`#category-${id}`).remove();
         } else {
           alert(result.message);
@@ -456,7 +433,7 @@ function deleteStaff(ele) {
       url: `${domain}staff/${id}`,
       success: (result) => {
         if (result.status == "success") {
-          // alert(result.status);
+          alert(result.status);
           $(`#staff-${id}`).remove();
         } else {
           alert(result.message);
@@ -494,7 +471,7 @@ function deleteMembership(ele) {
       url: `${domain}membership/${id}`,
       success: (result) => {
         if (result.status == "success") {
-          // alert(result.status);
+          alert(result.status);
           location.reload();
         } else {
           alert(result.message);
@@ -536,7 +513,7 @@ function deleteProduct(ele) {
       url: `${domain}product/${id}`,
       success: (result) => {
         if (result.status == "success") {
-          // alert(result.status);
+          alert(result.status);
           location.reload();
         } else {
           alert(result.message);
@@ -571,7 +548,7 @@ function deleteStorage(ele) {
       url: `${domain}storage/${id}`,
       success: (result) => {
         if (result.status == "success") {
-          // alert(result.status);
+          alert(result.status);
           location.reload();
         } else {
           alert(result.message);

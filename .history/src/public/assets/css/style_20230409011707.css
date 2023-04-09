@@ -11183,12 +11183,12 @@ pre code {
   display: block;
   width: 100%;
   overflow-x: auto;
-  max-height: 50em;
+  max-height: 30em;
   -webkit-overflow-scrolling: touch;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
+.table-responsive ::-webkit-scrollbar {
+  width: 20px;
 }
 
 /* Track */
@@ -11199,13 +11199,13 @@ pre code {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to right, #191c24, #0a0b0f);
+  background: rgb(28, 29, 59);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to right, #0a0b0f, #191c24);
+  background: #08092e;
 }
 
 .table-responsive>.table-bordered {

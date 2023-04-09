@@ -70,9 +70,10 @@ $(document).ready(function () {
   //   // }
   // });
   $("#addCategory")
-    .off() // đảm bảo chỉ có một sự kiện được thực thi
+    .off()
     .click(() => {
       const category = $("#addCategoryName").val().trim();
+      console.log(category);
       if (category) {
         $.ajax({
           type: "POST",

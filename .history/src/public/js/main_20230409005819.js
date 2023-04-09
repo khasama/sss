@@ -70,26 +70,10 @@ $(document).ready(function () {
   //   // }
   // });
   $("#addCategory")
-    .off() // đảm bảo chỉ có một sự kiện được thực thi
+    .off()
     .click(() => {
       const category = $("#addCategoryName").val().trim();
-      if (category) {
-        $.ajax({
-          type: "POST",
-          url: `${domain}category/`,
-          data: {
-            category,
-          },
-          success: (result) => {
-            if (result.status == "success") {
-              // alert(result.status);
-              location.reload();
-            } else {
-              alert(result.message);
-            }
-          },
-        });
-      }
+      console.log(category);
     });
 
   $("#addStaff").click(() => {

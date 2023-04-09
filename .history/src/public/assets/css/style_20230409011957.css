@@ -11183,7 +11183,7 @@ pre code {
   display: block;
   width: 100%;
   overflow-x: auto;
-  max-height: 50em;
+  max-height: 30em;
   -webkit-overflow-scrolling: touch;
 }
 
