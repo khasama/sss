@@ -1,54 +1,58 @@
 $(document).ready(function () {
-  $("#login-btn").click(() => {
-    const username = $("#username").val();
-    const password = $("#password").val();
-    if (username && password) {
-      $.ajax({
-        type: "POST",
-        url: `${domain}login`,
-        data: {
-          username,
-          password,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            window.location = "/";
-          } else {
-            alert(result.message);
-          }
-        },
-        error: (err) => {
-          console.log(err);
-          alert(err.statusText);
-        },
-      });
-    } else {
-      alert("Do Not empty!");
-    }
-  });
+  $("#login-btn")
+    .off()
+    .click(() => {
+      const username = $("#username").val();
+      const password = $("#password").val();
+      if (username && password) {
+        $.ajax({
+          type: "POST",
+          url: `${domain}login`,
+          data: {
+            username,
+            password,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              window.location = "/";
+            } else {
+              alert(result.message);
+            }
+          },
+          error: (err) => {
+            console.log(err);
+            alert(err.statusText);
+          },
+        });
+      } else {
+        alert("Do Not empty!");
+      }
+    });
 
-  $("#updateCategory").click(() => {
-    const category = $("#updateCategoryName").val().trim();
-    const id = $("#updateCategoryId").val();
-    if (category) {
-      $.ajax({
-        type: "PUT",
-        url: `${domain}category/${id}`,
-        data: { category },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#updateCategory")
+    .off()
+    .click(() => {
+      const category = $("#updateCategoryName").val().trim();
+      const id = $("#updateCategoryId").val();
+      if (category) {
+        $.ajax({
+          type: "PUT",
+          url: `${domain}category/${id}`,
+          data: { category },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 
-  // $("#addCategory").click(() => {
+  // $("#addCategory").off().click(() => {
   //   const category = $("#addCategoryName").val().trim();
   //   console.log(category);
   //   // if (category) {
@@ -71,6 +75,7 @@ $(document).ready(function () {
   // });
   $("#addCategory")
     .off() // đảm bảo chỉ có một sự kiện được thực thi
+    .off()
     .click(() => {
       const category = $("#addCategoryName").val().trim();
       if (category) {
@@ -92,277 +97,295 @@ $(document).ready(function () {
       }
     });
 
-  $("#addStaff").click(() => {
-    const fullName = $("#addStaffFullname").val().trim();
-    const age = $("#addStaffAge").val().trim();
-    const phone = $("#addStaffPhone").val().trim();
-    const gender = $("#addStaffGender").val().trim();
-    const address = $("#addStaffAddress").val().trim();
-    const email = $("#addStaffEmail").val().trim();
-    const username = $("#addStaffUsername").val().trim();
-    const password = $("#addStaffPassword").val().trim();
-    const role = $("#addStaffRole").val().trim();
-    if (
-      fullName &&
-      age &&
-      phone &&
-      gender &&
-      address &&
-      email &&
-      role &&
-      username &&
-      password
-    ) {
-      $.ajax({
-        type: "POST",
-        url: `${domain}staff/`,
-        data: {
-          fullName,
-          age,
-          phone,
-          gender,
-          address,
-          email,
-          role,
-          username,
-          password,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#addStaff")
+    .off()
+    .click(() => {
+      const fullName = $("#addStaffFullname").val().trim();
+      const age = $("#addStaffAge").val().trim();
+      const phone = $("#addStaffPhone").val().trim();
+      const gender = $("#addStaffGender").val().trim();
+      const address = $("#addStaffAddress").val().trim();
+      const email = $("#addStaffEmail").val().trim();
+      const username = $("#addStaffUsername").val().trim();
+      const password = $("#addStaffPassword").val().trim();
+      const role = $("#addStaffRole").val().trim();
+      if (
+        fullName &&
+        age &&
+        phone &&
+        gender &&
+        address &&
+        email &&
+        role &&
+        username &&
+        password
+      ) {
+        $.ajax({
+          type: "POST",
+          url: `${domain}staff/`,
+          data: {
+            fullName,
+            age,
+            phone,
+            gender,
+            address,
+            email,
+            role,
+            username,
+            password,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 
-  $("#updateStaff").click(() => {
-    const fullName = $("#updateStaffFullname").val().trim();
-    const age = $("#updateStaffAge").val().trim();
-    const phone = $("#updateStaffPhone").val().trim();
-    const gender = $("#updateStaffGender").val().trim();
-    const address = $("#updateStaffAddress").val().trim();
-    const email = $("#updateStaffEmail").val().trim();
-    const role = $("#updateStaffRole").val().trim();
-    const id = $("#updateStaffId").val().trim();
-    if (fullName && age && phone && gender && address && email && role) {
-      $.ajax({
-        type: "PUT",
-        url: `${domain}staff/${id}`,
-        data: {
-          fullName,
-          age,
-          phone,
-          gender,
-          address,
-          email,
-          role,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#updateStaff")
+    .off()
+    .click(() => {
+      const fullName = $("#updateStaffFullname").val().trim();
+      const age = $("#updateStaffAge").val().trim();
+      const phone = $("#updateStaffPhone").val().trim();
+      const gender = $("#updateStaffGender").val().trim();
+      const address = $("#updateStaffAddress").val().trim();
+      const email = $("#updateStaffEmail").val().trim();
+      const role = $("#updateStaffRole").val().trim();
+      const id = $("#updateStaffId").val().trim();
+      if (fullName && age && phone && gender && address && email && role) {
+        $.ajax({
+          type: "PUT",
+          url: `${domain}staff/${id}`,
+          data: {
+            fullName,
+            age,
+            phone,
+            gender,
+            address,
+            email,
+            role,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 
-  $("#addMember").click(() => {
-    const name = $("#addMemberName").val().trim();
-    const phone = $("#addMemberPhone").val().trim();
-    const level = $("#addMemberLevel").val().trim();
-    if (name && phone && level) {
-      $.ajax({
-        type: "POST",
-        url: `${domain}membership/`,
-        data: {
-          name,
-          phone,
-          level,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#addMember")
+    .off()
+    .click(() => {
+      const name = $("#addMemberName").val().trim();
+      const phone = $("#addMemberPhone").val().trim();
+      const level = $("#addMemberLevel").val().trim();
+      if (name && phone && level) {
+        $.ajax({
+          type: "POST",
+          url: `${domain}membership/`,
+          data: {
+            name,
+            phone,
+            level,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 
-  $("#updateMember").click(() => {
-    const name = $("#updateMemberName").val().trim();
-    const phone = $("#updateMemberPhone").val().trim();
-    const level = $("#updateMemberLevel").val().trim();
-    const id = $("#updateMemberId").val().trim();
-    if (name && phone && level) {
-      $.ajax({
-        type: "PUT",
-        url: `${domain}membership/${id}`,
-        data: {
-          name,
-          phone,
-          level,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#updateMember")
+    .off()
+    .click(() => {
+      const name = $("#updateMemberName").val().trim();
+      const phone = $("#updateMemberPhone").val().trim();
+      const level = $("#updateMemberLevel").val().trim();
+      const id = $("#updateMemberId").val().trim();
+      if (name && phone && level) {
+        $.ajax({
+          type: "PUT",
+          url: `${domain}membership/${id}`,
+          data: {
+            name,
+            phone,
+            level,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 
-  $("#addProduct").click(() => {
-    const name = $("#addProductName").val().trim();
-    const image = $("#addProductImage").val().trim();
-    const price = $("#addProductPrice").val();
-    const idCategory = $("#addProductCategory").val();
-    const sizeChecked = $("input[name=addSize]:checked");
-    const sizeArr = [];
-    if (name && image && price && sizeChecked.length > 0 && idCategory) {
-      sizeChecked.each(function () {
-        sizeArr.push($(this).val());
-      });
-      const size = sizeArr.join("|");
-      $.ajax({
-        type: "POST",
-        url: `${domain}product/`,
-        data: {
-          name,
-          image,
-          price,
-          idCategory,
-          size,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#addProduct")
+    .off()
+    .click(() => {
+      const name = $("#addProductName").val().trim();
+      const image = $("#addProductImage").val().trim();
+      const price = $("#addProductPrice").val();
+      const idCategory = $("#addProductCategory").val();
+      const sizeChecked = $("input[name=addSize]:checked");
+      const sizeArr = [];
+      if (name && image && price && sizeChecked.length > 0 && idCategory) {
+        sizeChecked.each(function () {
+          sizeArr.push($(this).val());
+        });
+        const size = sizeArr.join("|");
+        $.ajax({
+          type: "POST",
+          url: `${domain}product/`,
+          data: {
+            name,
+            image,
+            price,
+            idCategory,
+            size,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 
-  $("#updateProduct").click(() => {
-    const id = $("#updateProductId").val().trim();
-    const name = $("#updateProductName").val().trim();
-    const image = $("#updateProductImage").val().trim();
-    const price = $("#updateProductPrice").val();
-    const idCategory = $("#updateProductCategory").val();
-    const sizeChecked = $("input[name=updateSize]:checked");
-    const sizeArr = [];
-    if (name && image && price && sizeChecked.length > 0 && idCategory) {
-      sizeChecked.each(function () {
-        sizeArr.push($(this).val());
-      });
-      const size = sizeArr.join("|");
-      $.ajax({
-        type: "PUT",
-        url: `${domain}product/${id}`,
-        data: {
-          name,
-          image,
-          price,
-          idCategory,
-          size,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#updateProduct")
+    .off()
+    .click(() => {
+      const id = $("#updateProductId").val().trim();
+      const name = $("#updateProductName").val().trim();
+      const image = $("#updateProductImage").val().trim();
+      const price = $("#updateProductPrice").val();
+      const idCategory = $("#updateProductCategory").val();
+      const sizeChecked = $("input[name=updateSize]:checked");
+      const sizeArr = [];
+      if (name && image && price && sizeChecked.length > 0 && idCategory) {
+        sizeChecked.each(function () {
+          sizeArr.push($(this).val());
+        });
+        const size = sizeArr.join("|");
+        $.ajax({
+          type: "PUT",
+          url: `${domain}product/${id}`,
+          data: {
+            name,
+            image,
+            price,
+            idCategory,
+            size,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 
-  $("#addStorage").click(() => {
-    const idProduct = $("#addStorageProductId").val().trim();
-    const quantity = $("#addStorageQuantity").val().trim();
-    if (idProduct && quantity) {
-      $.ajax({
-        type: "POST",
-        url: `${domain}storage/`,
-        data: {
-          idProduct,
-          quantity,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#addStorage")
+    .off()
+    .click(() => {
+      const idProduct = $("#addStorageProductId").val().trim();
+      const quantity = $("#addStorageQuantity").val().trim();
+      if (idProduct && quantity) {
+        $.ajax({
+          type: "POST",
+          url: `${domain}storage/`,
+          data: {
+            idProduct,
+            quantity,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 
-  $("#updateBranch").click(() => {
-    const id = $("#updateBranchId").val().trim();
-    const branch = $("#updateBranchName").val();
-    const address = $("#updateBranchAddress").val();
-    if (id && branch && address) {
-      $.ajax({
-        type: "PUT",
-        url: `${domain}branch/${id}`,
-        data: {
-          branch,
-          address,
-        },
-        success: (result) => {
-          console.log("update", id);
-          console.log("name", branch);
-          console.log("address", address);
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
-  $("#updateStorage").click(() => {
-    const id = $("#updateStorageId").val().trim();
-    const quantity = $("#updateStorageQuantity").val();
-    if (id && quantity) {
-      $.ajax({
-        type: "PUT",
-        url: `${domain}storage/${id}`,
-        data: {
-          quantity,
-        },
-        success: (result) => {
-          if (result.status == "success") {
-            // alert(result.status);
-            location.reload();
-          } else {
-            alert(result.message);
-          }
-        },
-      });
-    }
-  });
+  $("#updateBranch")
+    .off()
+    .click(() => {
+      const id = $("#updateBranchId").val().trim();
+      const branch = $("#updateBranchName").val();
+      const address = $("#updateBranchAddress").val();
+      if (id && branch && address) {
+        $.ajax({
+          type: "PUT",
+          url: `${domain}branch/${id}`,
+          data: {
+            branch,
+            address,
+          },
+          success: (result) => {
+            console.log("update", id);
+            console.log("name", branch);
+            console.log("address", address);
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
+  $("#updateStorage")
+    .off()
+    .click(() => {
+      const id = $("#updateStorageId").val().trim();
+      const quantity = $("#updateStorageQuantity").val();
+      if (id && quantity) {
+        $.ajax({
+          type: "PUT",
+          url: `${domain}storage/${id}`,
+          data: {
+            quantity,
+          },
+          success: (result) => {
+            if (result.status == "success") {
+              // alert(result.status);
+              location.reload();
+            } else {
+              alert(result.message);
+            }
+          },
+        });
+      }
+    });
 });
 
 function modal(modal, button, close) {
